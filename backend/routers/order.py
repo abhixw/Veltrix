@@ -63,5 +63,9 @@ def checkout(db: Session = Depends(get_db), current_user: User = Depends(get_cur
     # the entire process rolls back instantly. Only when db.commit() fires does it all go through.
     db.commit()
     db.refresh(new_order)
-
     return new_order
+
+@router.get("/", response_model=List[OrderResponse])
+def get_orders(db: Session = Depends(get_db), current_user: User = Depends(get_current_user)):
+    orders = db.query(Order).filter(Order.user_id == current_user.id).order_by(Order.id.desc()).all()
+    return orders

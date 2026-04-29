@@ -1,25 +1,42 @@
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&display=swap');
 
 :root {
-  --bg-primary: #0a0a0a;
-  --bg-secondary: #141414;
-  --bg-surface: rgba(255, 255, 255, 0.05);
-  
-  --text-primary: #ffffff;
-  --text-secondary: #a1a1aa;
-  
-  --accent-primary: #6366f1; /* Indigo 500 */
-  --accent-hover: #4f46e5;
-  --accent-glow: rgba(99, 102, 241, 0.4);
-  
-  --danger: #ef4444;
-  --success: #10b981;
-  
-  --border: rgba(255, 255, 255, 0.1);
+  /* BACKGROUNDS (Clean, Premium White/Light Structure) */
+  --bg-primary: #ffffff;
+  --bg-secondary: #f1f5f9;
+  /* Very soft modern slate background */
+  --bg-surface: #ffffff;
+
+  /* TEXT */
+  --text-primary: #0f172a;
+  /* Deep slate instead of flat black */
+  --text-secondary: #64748b;
+
+  /* BRAND COLORS: MOSTLY ORANGE */
+  --orange-primary: #ff6b00;
+  /* Vibrant energetic e-commerce orange */
+  --orange-hover: #e85d00;
+  --orange-glow: rgba(255, 107, 0, 0.3);
+
+  /* BEAUTIFUL ACCENTS */
+  --blue-accent: #2563eb;
+  --blue-glow: rgba(37, 99, 235, 0.15);
+
+  --green-success: #059669;
+  /* Emerald green */
+
+  /* STRUCTURAL */
+  --border: #e2e8f0;
   --radius-sm: 8px;
-  --radius-md: 12px;
-  --radius-lg: 16px;
-  
+  --radius-md: 16px;
+  --radius-lg: 24px;
+
+  /* 3D Shadows */
+  --shadow-sm: 0 4px 6px -1px rgba(0, 0, 0, 0.05), 0 2px 4px -1px rgba(0, 0, 0, 0.03);
+  --shadow-md: 0 10px 15px -3px rgba(0, 0, 0, 0.08), 0 4px 6px -2px rgba(0, 0, 0, 0.04);
+  --shadow-lg: 0 20px 25px -5px var(--orange-glow), 0 10px 10px -5px rgba(255, 107, 0, 0.05);
+  /* Orange tinted drop-shadow */
+
   --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
@@ -30,8 +47,9 @@
 }
 
 body {
-  font-family: 'Inter', system-ui, -apple-system, sans-serif;
-  background-color: var(--bg-primary);
+  /* We upgrade to 'Outfit' font for that ultra-modern startup vibe */
+  font-family: 'Outfit', system-ui, -apple-system, sans-serif;
+  background-color: var(--bg-secondary);
   color: var(--text-primary);
   line-height: 1.6;
   min-height: 100vh;
@@ -39,19 +57,22 @@ body {
 }
 
 /* Typography elements */
-h1, h2, h3, h4 {
-  font-weight: 600;
-  letter-spacing: -0.02em;
+h1,
+h2,
+h3,
+h4 {
+  font-weight: 700;
+  letter-spacing: -0.03em;
+  color: var(--text-primary);
 }
 
-/* Glassmorphism Surface Utility */
+/* Surface Panels */
 .glass-panel {
   background: var(--bg-surface);
-  backdrop-filter: blur(12px);
-  -webkit-backdrop-filter: blur(12px);
   border: 1px solid var(--border);
   border-radius: var(--radius-md);
-  box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.3);
+  box-shadow: var(--shadow-sm);
+  transition: var(--transition);
 }
 
 /* Buttons */
@@ -60,9 +81,9 @@ h1, h2, h3, h4 {
   align-items: center;
   justify-content: center;
   gap: 0.5rem;
-  padding: 0.75rem 1.5rem;
-  font-size: 0.95rem;
-  font-weight: 500;
+  padding: 0.8rem 1.75rem;
+  font-size: 1rem;
+  font-weight: 600;
   border-radius: var(--radius-sm);
   border: none;
   cursor: pointer;
@@ -71,16 +92,16 @@ h1, h2, h3, h4 {
   text-decoration: none;
 }
 
+/* MOSTLY ORANGE ACTION BUTTONS */
 .btn-primary {
-  background: var(--accent-primary);
+  background: linear-gradient(135deg, var(--orange-primary) 0%, #ff8c33 100%);
   color: white;
-  box-shadow: 0 0 15px var(--accent-glow);
+  box-shadow: 0 4px 15px var(--orange-glow);
 }
 
 .btn-primary:hover:not(:disabled) {
-  background: var(--accent-hover);
-  transform: translateY(-2px);
-  box-shadow: 0 0 25px var(--accent-glow);
+  transform: translateY(-3px);
+  box-shadow: var(--shadow-lg);
 }
 
 .btn-primary:disabled {
@@ -89,112 +110,142 @@ h1, h2, h3, h4 {
   box-shadow: none;
 }
 
+/* BLUE ACCENT BUTTONS */
+.btn-secondary {
+  background: var(--blue-accent);
+  color: white;
+  box-shadow: 0 4px 15px var(--blue-glow);
+}
+
+.btn-secondary:hover:not(:disabled) {
+  transform: translateY(-3px);
+  background: #1d4ed8;
+}
+
+/* Ghost Buttons (Navbar) */
 .btn-ghost {
   background: transparent;
-  color: var(--text-primary);
-  border: 1px solid var(--border);
+  color: var(--text-secondary);
+  border: 1px solid transparent;
 }
 
 .btn-ghost:hover {
-  background: var(--bg-surface);
-  border-color: rgba(255, 255, 255, 0.2);
+  background: var(--bg-secondary);
+  color: var(--blue-accent);
+  /* Turns blue on hover */
 }
 
 /* Inputs */
 .input {
   width: 100%;
-  padding: 0.75rem 1rem;
-  background: rgba(0, 0, 0, 0.3);
-  border: 1px solid var(--border);
+  padding: 0.85rem 1.25rem;
+  background: white;
+  border: 2px solid var(--border);
   border-radius: var(--radius-sm);
   color: var(--text-primary);
   font-family: inherit;
-  font-size: 0.95rem;
+  font-size: 1rem;
   transition: var(--transition);
 }
 
 .input:focus {
-  border-color: var(--accent-primary);
-  box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.2);
+  border-color: var(--orange-primary);
+  box-shadow: 0 0 0 4px var(--orange-glow);
   outline: none;
 }
 
-/* Layout Utilities */
+/* LAYOUT */
 .container {
-  max-width: 1200px;
+  max-width: 1250px;
   margin: 0 auto;
   padding: 0 2rem;
 }
 
 .grid {
   display: grid;
-  gap: 2rem;
+  gap: 2.5rem;
 }
 
-/* Navbar */
+/* Navbar Wrapper */
 .navbar {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 1.5rem 0;
-  border-bottom: 1px solid var(--border);
-  margin-bottom: 3rem;
+  padding: 1.5rem 2rem;
+  margin: 1.5rem 0 3rem 0;
+  background: var(--bg-surface);
+  border-radius: var(--radius-md);
+  box-shadow: var(--shadow-sm);
+  border: 1px solid var(--border);
 }
 
 .nav-links {
   display: flex;
-  gap: 2rem;
+  gap: 1.5rem;
   align-items: center;
 }
 
+/* Stunning Gradient Brand (Orange & Blue) */
 .nav-brand {
-  font-size: 1.5rem;
-  font-weight: 700;
-  background: linear-gradient(135deg, #818cf8 0%, #c084fc 100%);
+  font-size: 1.75rem;
+  font-weight: 800;
+  background: linear-gradient(135deg, var(--orange-primary) 0%, var(--blue-accent) 100%);
   -webkit-background-clip: text;
+  background-clip: text;
   -webkit-text-fill-color: transparent;
   text-decoration: none;
+  letter-spacing: -1px;
 }
 
-/* Cards Micro-interactions */
+/* Product Cards */
 .product-card {
   transition: var(--transition);
   cursor: pointer;
   overflow: hidden;
   display: flex;
   flex-direction: column;
+  background: white;
 }
 
 .product-card:hover {
-  transform: translateY(-5px);
-  border-color: rgba(255,255,255,0.2);
+  transform: translateY(-8px);
+  box-shadow: var(--shadow-md);
+  border-color: var(--orange-primary);
+  /* Orange border glow on hover */
 }
 
 .product-img-wrapper {
   overflow: hidden;
   border-radius: var(--radius-md) var(--radius-md) 0 0;
-  border-bottom: 1px solid var(--border);
+  background: var(--bg-secondary);
 }
 
 .product-img {
   width: 100%;
-  height: 250px;
-  object-fit: cover;
-  transition: transform 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+  height: 280px;
+  object-fit: contain;
+  transition: transform 0.6s cubic-bezier(0.4, 0, 0.2, 1);
   display: block;
 }
 
 .product-card:hover .product-img {
-  transform: scale(1.05);
+  transform: scale(1.08);
 }
 
-/* Toast/Alerts */
+/* SUCCESS GREEN TEXT */
+.text-success {
+  color: var(--green-success);
+  font-weight: 800;
+}
+
+/* Alert */
 .alert {
-  padding: 1rem;
+  padding: 1rem 1.25rem;
   border-radius: var(--radius-sm);
-  background: rgba(239, 68, 68, 0.1);
-  border: 1px solid rgba(239, 68, 68, 0.2);
-  color: var(--danger);
-  margin-bottom: 1rem;
-  font-size: 0.9rem;
+  background: #fef2f2;
+  border-left: 4px solid #ef4444;
+  color: #991b1b;
+  margin-bottom: 1.5rem;
+  font-size: 0.95rem;
+  font-weight: 500;
 }

@@ -52,3 +52,37 @@ def view_cart(db: Session = Depends(get_db), current_user: User = Depends(get_cu
     # we know EXACTLY whose cart to look for.
     cart_items = db.query(CartItem).filter(CartItem.user_id == current_user.id).all()
     return cart_items
+
+@router.delete("/clear")
+def clear_cart(db: Session = Depends(get_db), current_user: User = Depends(get_current_user)):
+    db.query(CartItem).filter(CartItem.user_id == current_user.id).delete()
+    db.commit()
+    return {"message": "Cart cleared successfully"}
+
+@router.delete("/{item_id}")
+def remove_from_cart(item_id: int, db: Session = Depends(get_db), current_user: User = Depends(get_current_user)):
+    cart_item = db.query(CartItem).filter(CartItem.id == item_id, CartItem.user_id == current_user.id).first()
+    if not cart_item:
+        raise HTTPException(status_code=404, detail="Cart item not found")
+    
+    db.delete(cart_item)
+    db.commit()
+    return {"message": "Item natively removed from PostgreSQL"}
+
+from schemas.cart import CartItemUpdate
+@router.put("/{item_id}", response_model=CartItemResponse)
+def update_cart_item(item_id: int, item_update: CartItemUpdate, db: Session = Depends(get_db), current_user: User = Depends(get_current_user)):
+    cart_item = db.query(CartItem).filter(CartItem.id == item_id, CartItem.user_id == current_user.id).first()
+    
+    if not cart_item:
+        raise HTTPException(status_code=404, detail="Cart item not found")
+        
+    if item_update.quantity <= 0:
+        db.delete(cart_item) # Elegant fallback: if they decrement to 0, just delete the row!
+        db.commit()
+        raise HTTPException(status_code=204, detail="Item removed")
+        
+    cart_item.quantity = item_update.quantity
+    db.commit()
+    db.refresh(cart_item)
+    return cart_item

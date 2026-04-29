@@ -21,6 +21,7 @@ os.makedirs(UPLOAD_DIR, exist_ok=True)
 def create_product(
     name: str = Form(...),
     description: Optional[str] = Form(None),
+    category: str = Form("General"),
     price: float = Form(...),
     stock: int = Form(0),
     image: Optional[UploadFile] = File(None),
@@ -50,6 +51,7 @@ def create_product(
     new_product = Product(
         name=name,
         description=description,
+        category=category,
         price=price,
         stock=stock,
         image_url=image_url
@@ -61,6 +63,12 @@ def create_product(
     return new_product
 
 @router.get("/", response_model=List[ProductResponse])
-def get_products(db: Session = Depends(get_db)):
-    products = db.query(Product).all()
-    return products
+def get_products(search: Optional[str] = None, db: Session = Depends(get_db)):
+    query = db.query(Product)
+    if search:
+        # Search in name and description (case-insensitive)
+        query = query.filter(
+            (Product.name.ilike(f"%{search}%")) | 
+            (Product.description.ilike(f"%{search}%"))
+        )
+    return query.all()

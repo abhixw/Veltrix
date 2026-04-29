@@ -6,11 +6,16 @@ class CartItemAdd(BaseModel):
     product_id: int
     quantity: int = 1
 
+# What the frontend sends when updating an existing item in the cart
+class CartItemUpdate(BaseModel):
+    quantity: int
+
 # What the backend returns (includes the product details nested inside)
 class CartItemResponse(BaseModel):
     id: int
     user_id: int
     product_id: int
     quantity: int
+    product: ProductResponse # Nest the product dictionary seamlessly inside!
 
     model_config = ConfigDict(from_attributes=True)

@@ -26,3 +26,5 @@ class OrderItem(Base):
     product_id = Column(Integer, ForeignKey("products.id"), nullable=False)
     quantity = Column(Integer, nullable=False)
     price_at_purchase = Column(Float, nullable=False)
+
+    product = relationship("Product")
