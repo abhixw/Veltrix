@@ -1,28 +1,36 @@
 # Veltrix Commerce 🚀
 
-Veltrix is a premium, full-stack eCommerce platform engineered for speed, security, and a high-end shopping experience. Built with a modern **FastAPI** backend and a sleek **React** frontend, it features a transactional core loop including persistent shopping carts, inventory management, and automated order processing.
+Veltrix is a premium, high-performance eCommerce ecosystem engineered for scale, security, and intelligence. Beyond standard retail functions, Veltrix integrates **AI-driven recommendations**, **Sentiment Analysis**, and a **Stock Intelligence Hub** to provide a state-of-the-art enterprise retail experience.
 
 ---
 
-## ✨ Key Features
+## ✨ Advanced Intelligence & Features
 
-### 🛍️ Shopping Experience
-- **Premium UI/UX:** A stunning, Orange-themed interface inspired by modern high-end marketplaces (Vibe Commerce aesthetic).
-- **Categorical Navigation:** A sticky vertical sidebar for seamless browsing through Electronics, Lifestyle, Men's/Women's clothing, and more.
-- **Real-Time Search:** Live global search functionality across product names and descriptions.
-- **Dynamic Catalog:** Real-time product counts per category and status indicators (In Stock / Out of Stock).
+### 🧠 Triple-Engine AI Recommendations
+Veltrix uses a hybrid recommendation strategy to maximize user engagement:
+- **Collaborative Filtering:** Analyzes "Customers who bought this also liked..." patterns.
+- **Co-occurrence Analysis:** Identifies products frequently purchased together in the same basket.
+- **Semantic Mapping:** Suggests products with a "Similar Vibe" using description-based pattern matching.
 
-### 🛒 Cart & Checkout
-- **Cloud-Persisted Cart:** Items are saved to the database per user, ensuring your cart follows you across sessions.
-- **Interactive Management:** Quick adjust quantity (+/-) and surgical item removal with instantaneous subtotal recalculation.
-- **Transactional Checkout:** Atomic order processing with stock validation and row-level database locking to prevent overselling.
-- **Shipping Entry:** Dedicated checkout flow with shipping address collection and secure payment simulation.
+### 🎭 Feedback & Sentiment Analysis
+- **AI Sentiment Moderation:** Reviews are automatically analyzed using `TextBlob` to assign sentiment scores.
+- **Sentiment Shield:** Admins can monitor global customer sentiment trends (Positive vs. Critical) from a central hub.
+- **Verified Purchase Badging:** Automatically tags reviews from users who have completed a transaction for the product.
 
-### 📜 User & Admin Management
-- **Role-Based Access (RBAC):** Separate interfaces for **Users** (Shoppers) and **Managers** (Admins).
-- **Manager Dashboard:** Specialized portal for managers to upload inventory, set prices, and manage stock with automated image processing.
-- **Order History:** Comprehensive receipt-style order tracking with historical price snapshots.
-- **Secure Auth:** JWT-based authentication system with encrypted password storage.
+### 🎟️ Promotional & Coupon Engine
+- **Flexible Discounting:** Supports both **Percentage** (e.g., 20% off) and **Flat Rate** (e.g., $10 off) logic.
+- **Usage Governance:** Enforces expiry dates, maximum usage limits, and per-user redemption constraints.
+- **Real-Time Validation:** Instant subtotal updates in the checkout flow upon coupon application.
+
+### 📊 Admin Intelligence Hub
+- **Sales Velocity Tracking:** Real-time monitoring of turnover and best-selling inventory.
+- **Stock Alert System:** High-visibility warnings for low-stock items.
+- **Review Moderation Hub:** Centralized portal to delete or moderate feedbacks across all products.
+- **SuperAdmin Hardening:** Strict role-based hardening restricting sensitive operations to a designated master account.
+
+### 📱 Responsive & Mobile-First
+- **Adaptive Layouts:** Fully refactored CSS Grid/Flexbox system that adapts seamlessly from ultra-wide monitors to mini smartphones.
+- **Mobile Navigation:** Interactive horizontal category sliders and collapsible menus for peak mobile UX.
 
 ---
 
@@ -31,11 +39,11 @@ Veltrix is a premium, full-stack eCommerce platform engineered for speed, securi
 | Component | Technology |
 | :--- | :--- |
 | **Backend** | Python / FastAPI |
-| **Frontend** | React (Vite) / Vanilla CSS |
-| **Database** | PostgreSQL / SQLAlchemy ORM |
-| **Authentication** | JWT (JSON Web Tokens) |
-| **Icons** | Lucide React |
-| **Typography** | Google Fonts (Outfit) |
+| **Intelligence** | TextBlob (NLP) / Recommendation Micro-services |
+| **Frontend** | React (Vite) / Mobile-Responsive CSS |
+| **Database** | SQLite (Development) / SQLAlchemy ORM |
+| **Authentication** | JWT (JSON Web Tokens) with Role-Based Guarding |
+| **Design System** | Vibe Commerce Aesthetic (Emerald Green / Deep Blue) |
 
 ---
 
@@ -44,33 +52,26 @@ Veltrix is a premium, full-stack eCommerce platform engineered for speed, securi
 ### 1. Prerequisites
 - Python 3.9+
 - Node.js & npm
-- PostgreSQL
 
 ### 2. Backend Setup
 ```bash
 cd backend
-# Create virtual environment
 python -m venv venv
 source venv/bin/activate  # On Windows: venv\Scripts\activate
 
-# Install dependencies(if requirements.txt exists)
-pip install fastapi uvicorn sqlalchemy psycopg2-binary python-multipart python-jose[cryptography] passlib[bcrypt]
+# Install Core & Intelligence Dependencies
+pip install fastapi uvicorn sqlalchemy python-multipart python-jose[cryptography] passlib[bcrypt] textblob
 
 # Run the server
 uvicorn main:app --reload
 ```
-*The backend runs at `http://127.0.0.1:8000`*
 
 ### 3. Frontend Setup
 ```bash
 cd frontend
-# Install dependencies
 npm install
-
-# Run development server
 npm run dev
 ```
-*The frontend runs at `http://localhost:5173`*
 
 ---
 
@@ -79,24 +80,16 @@ npm run dev
 ```text
 Veltrix/
 ├── backend/
-│   ├── models/       # SQLAlchemy Database Models
-│   ├── routers/      # FastAPI REST API Endpoints
-│   ├── schemas/      # Pydantic Data Structures
-│   ├── uploads/      # Static Media (Product Images)
-│   └── main.py       # Application Entry Point
+│   ├── models/       # Intelligence-aware SQLAlchemy Models (Review, Coupon, Recs)
+│   ├── routers/      # Hardened REST API Endpoints
+│   ├── services/     # Recommendation & Business Logic Layer
+│   └── uploads/      # Static Media (Product Images)
 └── frontend/
     ├── src/
-    │   ├── pages/    # React View Components (Cart, Orders, etc.)
-    │   ├── App.jsx   # Routing Logic
-    │   └── index.css # Premium Design System
+    │   ├── pages/    # AdminHub, Favorites, ReviewsHub, Checkout, etc.
+    │   ├── App.jsx   # Global Context & Responsive Routing
+    │   └── index.css # Premium Design Language & Media Queries
 ```
-
----
-
-## 🔒 Security & Performance
-- **Transactional Integrity:** Uses ACID-compliant transactions for checkout.
-- **Static File Optimization:** Product images are served via mounted static directories for low-latency delivery.
-- **Responsive Design:** Edge-to-edge layout optimization for desktops and tablets.
 
 ---
 *Veltrix Commerce — Engineering the future of retail.*
