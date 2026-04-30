@@ -1,4 +1,5 @@
-from sqlalchemy import Column, Integer, String, Float, ForeignKey
+from sqlalchemy import Column, Integer, String, Float, ForeignKey, DateTime
+from sqlalchemy.sql import func
 from sqlalchemy.orm import relationship
 from database import Base
 
@@ -7,8 +8,13 @@ class Order(Base):
 
     id = Column(Integer, primary_key=True, index=True)
     user_id = Column(Integer, ForeignKey("users.id"), nullable=False)
-    total_amount = Column(Float, nullable=False)
-    status = Column(String, default="PENDING") # PENDING, PAID, SHIPPED...
+    total_amount = Column(Float, nullable=False) # Final paid amount
+    original_amount = Column(Float, nullable=True) # Price before discount
+    coupon_code = Column(String, nullable=True)
+    status = Column(String, default="CONFIRMED")
+    tracking_id = Column(String, nullable=True)
+    created_at = Column(DateTime(timezone=True), server_default=func.now())
+    updated_at = Column(DateTime(timezone=True), onupdate=func.now())
 
     # Let SQLAlchemy know there's a 1-to-Many relationship with OrderItems
     items = relationship("OrderItem")

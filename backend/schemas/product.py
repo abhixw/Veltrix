@@ -7,7 +7,6 @@ class ProductBase(BaseModel):
     description: Optional[str] = None
     price: float
     stock: int = 0
-    category: str
 
 # Schema used when creating a product (we omit ID and image_url here because the DB handles ID, and the router handles the file upload)
 class ProductCreate(ProductBase):

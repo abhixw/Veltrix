@@ -67,7 +67,7 @@ def remove_from_cart(item_id: int, db: Session = Depends(get_db), current_user: 
     
     db.delete(cart_item)
     db.commit()
-    return {"message": "Item natively removed from PostgreSQL"}
+    return {"message": "Item removed"}
 
 from schemas.cart import CartItemUpdate
 @router.put("/{item_id}", response_model=CartItemResponse)
@@ -78,9 +78,9 @@ def update_cart_item(item_id: int, item_update: CartItemUpdate, db: Session = De
         raise HTTPException(status_code=404, detail="Cart item not found")
         
     if item_update.quantity <= 0:
-        db.delete(cart_item) # Elegant fallback: if they decrement to 0, just delete the row!
+        db.delete(cart_item)
         db.commit()
-        raise HTTPException(status_code=204, detail="Item removed")
+        return {"message": "Item removed"}
         
     cart_item.quantity = item_update.quantity
     db.commit()

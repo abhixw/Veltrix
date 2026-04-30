@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { useNavigate, Link } from 'react-router-dom';
 import { Package } from 'lucide-react';
 
-const Login = ({ setToken, setRole }) => {
+const Login = ({ setToken, setRole, setUserEmail }) => {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const [error, setError] = useState(null);
@@ -27,8 +27,10 @@ const Login = ({ setToken, setRole }) => {
 
             localStorage.setItem('token', data.access_token);
             localStorage.setItem('role', data.role);
+            localStorage.setItem('userEmail', email); // Save for Admin verification
             setToken(data.access_token);
             setRole(data.role);
+            setUserEmail(email);
 
             navigate('/'); // Go back to dashboard!
         } catch (err) {
@@ -36,64 +38,79 @@ const Login = ({ setToken, setRole }) => {
         }
     };
 
+    const [isHovered, setIsHovered] = useState(false);
+
     return (
-        <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', minHeight: '80vh' }}>
+        <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', minHeight: '90vh' }}>
 
-            {/* Central Vaultflow Card UI perfectly mimicking the request screenshot */}
-            <div style={{ background: '#fff', borderRadius: '24px', padding: '3.5rem 2.5rem', width: '100%', maxWidth: '440px', boxShadow: '0 20px 40px rgba(0,0,0,0.06)', border: '1px solid #f1f5f9', textAlign: 'center' }}>
+            <div style={{ background: '#fff', borderRadius: '32px', padding: '4rem 3rem', width: '100%', maxWidth: '460px', boxShadow: '0 25px 50px -12px rgba(0,0,0,0.08)', border: '1px solid #f1f5f9', textAlign: 'center' }}>
 
-                {/* Mock Logo Header */}
-                <div style={{ display: 'flex', justifyContent: 'center', marginBottom: '1.5rem' }}>
-                    <div style={{ background: 'var(--blue-glow)', padding: '1rem', borderRadius: '50%' }}>
-                        <Package size={42} color="var(--blue-accent)" style={{ display: 'block' }} />
+                {/* LOGO SECTION */}
+                <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', marginBottom: '2.5rem' }}>
+                    <div style={{ background: '#ecfdf5', padding: '1.25rem', borderRadius: '20px', marginBottom: '1rem' }}>
+                        <Package size={48} color="#10b981" />
                     </div>
+                    <h1 style={{ fontSize: '1.75rem', fontWeight: '900', color: '#064e3b', letterSpacing: '-1px' }}>Veltrix <span style={{ color: '#10b981' }}>Commerce</span></h1>
+                    <p style={{ color: '#64748b', fontSize: '0.9rem', fontWeight: '600', marginTop: '0.5rem' }}>Secure Enterprise Gateway</p>
                 </div>
 
-                {/* Blue Stylized Typography */}
-                <h2 style={{ color: 'var(--blue-accent)', fontSize: '2.2rem', marginBottom: '0.5rem', fontWeight: '800', letterSpacing: '-0.5px' }}>Welcome Back</h2>
-                <p style={{ color: 'var(--text-secondary)', marginBottom: '3rem', fontSize: '1rem', fontWeight: '500' }}>Log in to Veltrix today</p>
+                <h2 style={{ color: '#064e3b', fontSize: '2rem', marginBottom: '0.5rem', fontWeight: '800' }}>Login</h2>
+                <p style={{ color: '#64748b', marginBottom: '2.5rem', fontSize: '0.95rem' }}>Welcome back to your workspace</p>
 
-                {error && <div className="alert" style={{ textAlign: 'left' }}>{error}</div>}
+                {error && <div className="alert" style={{ textAlign: 'left', background: '#fef2f2', borderLeft: '4px solid #ef4444' }}>{error}</div>}
 
-                {/* The Form Fields matching the Vaultflow aesthetic */}
-                <form onSubmit={handleLogin} style={{ display: 'flex', flexDirection: 'column', gap: '1.25rem', textAlign: 'left' }}>
+                <form onSubmit={handleLogin} style={{ display: 'flex', flexDirection: 'column', gap: '1.5rem', textAlign: 'left' }}>
 
                     <div>
-                        <label style={{ display: 'block', fontSize: '0.85rem', fontWeight: '600', color: 'var(--text-secondary)', marginBottom: '0.5rem', textAlign: 'center' }}>Email Address</label>
+                        <label style={{ display: 'block', fontSize: '0.8rem', fontWeight: '800', color: '#334155', marginBottom: '0.6rem', textTransform: 'uppercase', letterSpacing: '0.5px' }}>Email Address</label>
                         <input
                             type="email"
                             value={email}
                             onChange={(e) => setEmail(e.target.value)}
-                            style={{ width: '100%', padding: '0.9rem 1rem', border: '2px solid #93c5fd', borderRadius: '12px', fontSize: '1rem', outline: 'none', transition: 'all 0.2s', background: '#fff', color: 'var(--text-primary)' }}
-                            onFocus={(e) => e.target.style.borderColor = 'var(--blue-accent)'}
-                            onBlur={(e) => e.target.style.borderColor = '#93c5fd'}
+                            style={{ width: '100%', padding: '1rem 1.25rem', border: '2px solid #d1fae5', borderRadius: '14px', fontSize: '1rem', outline: 'none', transition: 'all 0.2s', background: '#f9fafb' }}
+                            onFocus={(e) => e.target.style.borderColor = '#10b981'}
+                            onBlur={(e) => e.target.style.borderColor = '#d1fae5'}
                             required
                         />
                     </div>
 
-                    <div>
-                        <label style={{ display: 'block', fontSize: '0.85rem', fontWeight: '600', color: 'var(--text-secondary)', marginBottom: '0.5rem', textAlign: 'center' }}>Password</label>
+                    <div style={{ marginBottom: '1rem' }}>
+                        <label style={{ display: 'block', fontSize: '0.8rem', fontWeight: '800', color: '#334155', marginBottom: '0.6rem', textTransform: 'uppercase', letterSpacing: '0.5px' }}>Password</label>
                         <input
                             type="password"
                             value={password}
                             onChange={(e) => setPassword(e.target.value)}
-                            style={{ width: '100%', padding: '0.9rem 1rem', border: '2px solid #93c5fd', borderRadius: '12px', fontSize: '1rem', outline: 'none', transition: 'all 0.2s', background: '#fff', color: 'var(--text-primary)' }}
-                            onFocus={(e) => e.target.style.borderColor = 'var(--blue-accent)'}
-                            onBlur={(e) => e.target.style.borderColor = '#93c5fd'}
+                            style={{ width: '100%', padding: '1rem 1.25rem', border: '2px solid #d1fae5', borderRadius: '14px', fontSize: '1rem', outline: 'none', transition: 'all 0.2s', background: '#f9fafb' }}
+                            onFocus={(e) => e.target.style.borderColor = '#10b981'}
+                            onBlur={(e) => e.target.style.borderColor = '#d1fae5'}
                             required
                         />
                     </div>
 
-                    <button type="submit" style={{ width: '100%', padding: '1rem', background: 'var(--blue-accent)', color: '#fff', border: 'none', borderRadius: '12px', fontSize: '1.05rem', fontWeight: '700', cursor: 'pointer', transition: 'all 0.2s', marginTop: '1rem', boxShadow: '0 4px 14px var(--blue-glow)' }}
-                        onMouseOver={(e) => e.target.style.transform = 'translateY(-2px)'}
-                        onMouseOut={(e) => e.target.style.transform = 'translateY(0)'}
+                    <button
+                        type="submit"
+                        onMouseEnter={() => setIsHovered(true)}
+                        onMouseLeave={() => setIsHovered(false)}
+                        style={{
+                            width: '100%',
+                            padding: '1.1rem',
+                            background: isHovered ? '#2563eb' : '#10b981',
+                            color: '#fff',
+                            border: 'none',
+                            borderRadius: '14px',
+                            fontSize: '1.1rem',
+                            fontWeight: '800',
+                            cursor: 'pointer',
+                            transition: 'all 0.3s ease',
+                            boxShadow: isHovered ? '0 10px 15px -3px rgba(37, 99, 235, 0.3)' : '0 10px 15px -3px rgba(16, 185, 129, 0.3)'
+                        }}
                     >
-                        Login
+                        Sign In
                     </button>
                 </form>
 
-                <p style={{ marginTop: '2rem', fontSize: '0.9rem', color: 'var(--text-secondary)' }}>
-                    Don't have an account? <Link to="/register" style={{ color: 'var(--blue-accent)', fontWeight: '700', textDecoration: 'none' }}>Register here</Link>
+                <p style={{ marginTop: '2.5rem', fontSize: '0.95rem', color: '#64748b', fontWeight: '500' }}>
+                    Need a professional account? <Link to="/register" style={{ color: '#10b981', fontWeight: '800', textDecoration: 'none', borderBottom: '2px solid #d1fae5' }}>Register</Link>
                 </p>
 
             </div>
