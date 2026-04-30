@@ -8,25 +8,25 @@ Veltrix is a premium, high-performance eCommerce ecosystem engineered for scale,
 
 ---
 
-## 💎 The Veltrix Edge
+##  The Veltrix Edge
 
-### 🧠 Triple-Engine AI Recommendations
+###  Triple-Engine AI Recommendations
 Veltrix maximizes user engagement and Average Order Value (AOV) through a hybrid intelligence strategy:
 - **Collaborative Engine:** Analyzes cross-user behavior patterns ("Customers who bought this also liked...").
 - **Basket Co-occurrence:** Mathematically identifies products frequently purchased together in the same transaction.
 - **Semantic Vibe-Mapping:** Utilizes NLP to suggest products with similar stylistic attributes and "vibes."
 
-### 🎭 AI-Driven Sentiment Moderation
+###  AI-Driven Sentiment Moderation
 - **Real-Time NLP Analysis:** Every customer review is processed via `TextBlob` to assign a polarity score.
 - **Sentiment Shield:** A dedicated Admin hub monitors the global "Store Vibe," identifying trends in positive vs. critical feedback.
 - **Transactional Verification:** Fraud-resistant badge system that automatically verifies reviews from confirmed purchasers.
 
-### 🎟️ Enterprise Promotional Engine
+### Enterprise Promotional Engine
 - **Atomic Discounting:** Supports both dynamic **Percentage** and fixed **Flat Rate** logic.
 - **Usage Governance:** Sophisticated constraints including expiry tracking, global usage caps, and per-user redemption limits.
 - **Live Cart Injection:** Seamless integration with the checkout flow for instantaneous price adjustments.
 
-### 📊 Admin Tactical Command Center
+### Admin Tactical Command Center
 - **Sales Velocity Analytics:** High-precision monitoring of stock turnover and high-performing categories.
 - **Predictive Stock Alerts:** Automated high-visibility warnings triggered when inventory reaches critical thresholds.
 - **Global Moderation Suite:** One-click review management and sentiment-based filtering.
@@ -38,7 +38,7 @@ Veltrix maximizes user engagement and Average Order Value (AOV) through a hybrid
 
 ---
 
-## 🛠️ Modern Tech Architecture
+##  Modern Tech Architecture
 
 | Layer | Technology | Purpose |
 | :--- | :--- | :--- |
@@ -51,7 +51,7 @@ Veltrix maximizes user engagement and Average Order Value (AOV) through a hybrid
 
 ---
 
-## 🚀 Deployment & Installation
+##  Deployment & Installation
 
 ### 1. System Requirements
 - **Python:** 3.9 or higher
@@ -80,7 +80,7 @@ npm run dev
 
 ---
 
-## 📂 Architecture Overview
+##  Architecture Overview
 
 ```text
 Veltrix/
