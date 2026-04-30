@@ -1,4 +1,4 @@
-# 🌌 Veltrix Commerce Ecosystem
+#  Veltrix Commerce Ecosystem
 
 [![FastAPI](https://img.shields.io/badge/Backend-FastAPI-05998b.svg?style=for-the-badge&logo=fastapi)](https://fastapi.tiangolo.com/)
 [![React](https://img.shields.io/badge/Frontend-React-61DAFB.svg?style=for-the-badge&logo=react)](https://reactjs.org/)
@@ -32,7 +32,7 @@ Veltrix maximizes user engagement and Average Order Value (AOV) through a hybrid
 - **Global Moderation Suite:** One-click review management and sentiment-based filtering.
 - **SuperAdmin Hardening:** Hardcoded identity verification (`abhinavhshrimali12@gmail.com`) ensuring only authorized leadership can access tactical tools.
 
-### 📱 Responsive "Aura" Design System
+###  Responsive "Aura" Design System
 - **Mobile-First Fluids:** A completely refactored layout that transforms from a desktop powerhouse into a sleek mobile app.
 - **Adaptive Navigation:** Features horizontal category sliders and collapsible command menus for peak mobile accessibility.
 
