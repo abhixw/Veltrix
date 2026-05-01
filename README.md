@@ -20,6 +20,9 @@ Veltrix is a premium, high-performance eCommerce ecosystem engineered for scale,
   <h3>Secure Transactional Checkout</h3>
   <img src="docs/screenshots/checkout_page.png" width="800px" alt="Checkout">
   <br/><br/>
+  <h3>Dynamic Category Intelligence</h3>
+  <img src="docs/screenshots/all_categories.png" width="800px" alt="All Categories">
+  <br/><br/>
   <h3>Admin Inventory Intelligence</h3>
   <img src="docs/screenshots/upload_modal.png" width="800px" alt="Admin Upload">
 </div>
