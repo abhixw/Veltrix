@@ -2,7 +2,6 @@ from fastapi import APIRouter, Depends, HTTPException
 from sqlalchemy.orm import Session
 from sqlalchemy import func, desc
 from datetime import datetime, timedelta
-from typing import List
 
 from database import get_db
 from dependencies import get_current_user
@@ -73,7 +72,8 @@ def get_demand_prediction(db: Session = Depends(get_db), current_user: User = De
         raise HTTPException(status_code=403, detail="Admin access required")
 
     # Simple Prediction: Avg units sold per day over last 7 days
-    seven_days_ago = datetime.utcnow() - timedelta(days=7)
+    from datetime import timezone
+    seven_days_ago = datetime.now(timezone.utc).replace(tzinfo=None) - timedelta(days=7)
     
     recent_sales = db.query(
         OrderItem.product_id,

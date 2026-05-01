@@ -58,7 +58,7 @@ def checkout(
     applied_coupon = None
 
     if request.coupon_code:
-        coupon = db.query(Coupon).filter(Coupon.code == request.coupon_code.upper(), Coupon.is_active == True).first()
+        coupon = db.query(Coupon).filter(Coupon.code == request.coupon_code.upper(), Coupon.is_active).first()
         if coupon:
             # Re-validate here for safety during transaction
             if not(coupon.expiry_date and coupon.expiry_date < datetime.now(timezone.utc)) and (coupon.times_used < coupon.usage_limit):
@@ -82,10 +82,10 @@ def checkout(
     )
     db.add(new_order)
 
-    # 6. Clear out their shopping cart since they bought the items
+    # 7. Clear out their shopping cart since they bought the items
     db.query(CartItem).filter(CartItem.user_id == current_user.id).delete()
 
-    # 7. COMMIT TRANSACTION
+    # 8. COMMIT TRANSACTION
     # Up to this exact moment, NOTHING has been saved! If an error happened at step 2,
     # the entire process rolls back instantly. Only when db.commit() fires does it all go through.
     db.commit()

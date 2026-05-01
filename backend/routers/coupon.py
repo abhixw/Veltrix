@@ -12,7 +12,7 @@ router = APIRouter(prefix="/coupons", tags=["Coupons"])
 
 @router.post("/validate", response_model=CouponResponse)
 def validate_coupon(apply_in: CouponApply, db: Session = Depends(get_db)):
-    coupon = db.query(Coupon).filter(Coupon.code == apply_in.code.upper(), Coupon.is_active == True).first()
+    coupon = db.query(Coupon).filter(Coupon.code == apply_in.code.upper(), Coupon.is_active).first()
     
     if not coupon:
         raise HTTPException(status_code=404, detail="Coupon not found or inactive")

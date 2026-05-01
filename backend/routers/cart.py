@@ -7,7 +7,7 @@ from dependencies import get_current_user
 from models.user import User
 from models.product import Product
 from models.cart import CartItem
-from schemas.cart import CartItemAdd, CartItemResponse
+from schemas.cart import CartItemAdd, CartItemResponse, CartItemUpdate
 
 router = APIRouter(prefix="/cart", tags=["Cart"])
 
@@ -69,7 +69,6 @@ def remove_from_cart(item_id: int, db: Session = Depends(get_db), current_user: 
     db.commit()
     return {"message": "Item removed"}
 
-from schemas.cart import CartItemUpdate
 @router.put("/{item_id}", response_model=CartItemResponse)
 def update_cart_item(item_id: int, item_update: CartItemUpdate, db: Session = Depends(get_db), current_user: User = Depends(get_current_user)):
     cart_item = db.query(CartItem).filter(CartItem.id == item_id, CartItem.user_id == current_user.id).first()

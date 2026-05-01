@@ -8,6 +8,24 @@ Veltrix is a premium, high-performance eCommerce ecosystem engineered for scale,
 
 ---
 
+## 📸 Platform Showcase
+
+<div align="center">
+  <h3>Secure Enterprise Login</h3>
+  <img src="docs/screenshots/login_page.png" width="800px" alt="Veltrix Login">
+  <br/><br/>
+  <h3>Advanced Product Insights & AI Reviews</h3>
+  <img src="docs/screenshots/product_reviews.png" width="800px" alt="Product Details">
+  <br/><br/>
+  <h3>Secure Transactional Checkout</h3>
+  <img src="docs/screenshots/checkout_page.png" width="800px" alt="Checkout">
+  <br/><br/>
+  <h3>Admin Inventory Intelligence</h3>
+  <img src="docs/screenshots/upload_modal.png" width="800px" alt="Admin Upload">
+</div>
+
+---
+
 ##  The Veltrix Edge
 
 ###  Triple-Engine AI Recommendations
@@ -81,6 +99,10 @@ npm run dev
 ---
 
 ##  Architecture Overview
+
+<div align="center">
+  <img src="docs/screenshots/system_architecture.png" width="1000px" alt="Veltrix System Architecture">
+</div>
 
 ```text
 Veltrix/

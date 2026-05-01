@@ -2,14 +2,6 @@ from fastapi import FastAPI
 from database import engine, Base
 import os
 from fastapi.staticfiles import StaticFiles
-from models.user import User
-from models.product import Product
-from models.cart import CartItem
-from models.order import Order, OrderItem
-from models.recommendation import ViewHistory
-from models.review import Review
-from models.favorite import Favorite
-from models.coupon import Coupon
 from routers.auth import router as auth_router
 from routers.product import router as product_router
 from routers.cart import router as cart_router
